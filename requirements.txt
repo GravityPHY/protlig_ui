@@ -7,7 +7,6 @@ pandas==1.5.3
 Pillow==9.0.1
 py3Dmol==2.0.0.post2
 pyfiglet==0.8.post1
-rdkit_pypi==2021.9.4
 requests==2.27.1
 scipy==1.6.2
 seaborn==0.12.2
