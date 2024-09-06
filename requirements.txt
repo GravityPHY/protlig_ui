@@ -1,3 +1,4 @@
+python==3.8.19
 Bio==1.6.2
 biopython==1.83
 lxml==4.6.5
