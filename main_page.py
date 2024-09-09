@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-components.iframe("https://docs.google.com/presentation/d/163Fgc2M7mN6zsXXqr8zte43ZAl8-Sa7ztMF--_YaHZ4/edit?usp=sharing", height=565)
+components.iframe("https://docs.google.com/presentation/d/1XgtgcMwRlN31ygdetSuipOWeuL05V-B8jRCiKKHf9FA/embed?start=false&loop=false&delayms=3000", height=565)
 
 st.markdown("# Internship at Discovery Sciences, Data Science Team of Novartis Institutes for BioMedical Research (NIBR)")
 st.markdown("##### June 3rd - August 9th")
