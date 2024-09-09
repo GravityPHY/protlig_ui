@@ -1,2 +1,8 @@
-Proteins are the building blocks of life. Each protein is composed by a sequence of amino acids. The attraction and repulsion between the amino acids cause the string of amino acid to fold into a 3D structure. Figuring out how a sequence of amino acids folds into protein is known as protein-folding problem and has stood as a challenge in biology for the past 50 years. AlphaFold[1], an artificial intelligence(AI) tool, produces a solution to this problem. The breakthrough leading by AlphaFold advanced the development of AI for drug discovery paradigm, 
-and the next important question to focus is the interactions between small molecules and proteins, would AI-based tools provide solution to protein and small molecule co-folding task? 
+Proteins are the building blocks of life. 
+Each protein is composed by a sequence of amino acids. 
+The attraction and repulsion between the amino acids cause the string of amino acid to fold into a 3D structure. 
+Figuring out how a sequence of amino acids folds into protein is known as protein-folding problem and has stood as a challenge in biology for the past 50 years. 
+AlphaFold[1], an artificial intelligence(AI) tool, produces a leading solution to this problem and is advancing the development of AI for drug discovery paradigm. 
+The next important focus is about the interactions between small molecules and proteins, named the protein and small molecule co-folding task. 
+In this internship project, I evaluated the performance of two available AI-based tools[2,3] developed for protein and small molecule co-folding with Novartis internal data. 
+The goal of this project is to assess their performance and determine suitability for internal drug discovery programs. 

@@ -1,3 +1,4 @@
+import io
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -16,7 +17,7 @@ pdb_file =st.sidebar.file_uploader("Choose a file",type=['pdb'])
 
 pdb_code = st.sidebar.text_input(
         label="PDB Code",
-        value="3K8Y",
+        value=None,
     )
 
 #if pdb_file:
@@ -65,6 +66,15 @@ if pdb_file:
     
 elif pdb_code:
     view = py3Dmol.view(query=f"pdb:{pdb_code.lower()}", width=width, height=height)
+
+else:
+    view = py3Dmol.view(width=width, height=height)
+    pdb_file="./showcase/8SLG_relaxed_plddt.pdb"
+    temp_file = io.open(pdb_file, mode="r", encoding="utf-8")
+    temp_file_path = pdb_file
+    view.addModel(temp_file.read())
+    view.zoomTo()
+    
 
 
 view.setStyle({"cartoon": {"style": "oval","color": bb_color,"thickness": cartoon_radius}})

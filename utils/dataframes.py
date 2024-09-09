@@ -12,7 +12,7 @@ def get_pdb_df(pdb_file_path):
                 atom_bfactor=[]
                 for atom in residue:
                     atom_bfactor.append(atom.get_bfactor())
-                df_data.append({"Residue Number":residue.get_id()[1],"Residue Name": residue.get_resname(),
+                df_data.append({"Residue Name": residue.get_resname(),
                              "pLDDT": np.mean(atom_bfactor)})
     df = pd.DataFrame(df_data)
     return df
