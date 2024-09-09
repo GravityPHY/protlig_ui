@@ -1,4 +1,4 @@
-import streamlit as st
+
 
 st.markdown("# Internship Takeaways")
 st.markdown("## Novartis working culture")
