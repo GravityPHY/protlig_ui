@@ -7,5 +7,5 @@ st.markdown("- Life-long learning environment")
 
 
 st.markdown("## Relavence to PhD research")
-st.markdown("- Learned to analyze protein ligand interaction.")
+st.markdown("- Gained experience analyzing protein ligand interactions.")
 st.markdown("- To include practical values in mind when developing AI tools")
