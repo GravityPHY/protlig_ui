@@ -33,7 +33,7 @@ pdb_code = st.sidebar.text_input(
 
 
 st.sidebar.title("View Settings")
-surf_transp = st.sidebar.slider("Surface Transparency", min_value=0.0, max_value=1.0, value=0.0)
+surf_transp = st.sidebar.slider("Surface Transparency", min_value=0.0, max_value=1.0, value=0.5)
 
 hl_chain = st.sidebar.text_input(label="Highlight Chain",value="A")
 
@@ -75,6 +75,7 @@ else:
     view.addModel(temp_file.read())
     view.zoomTo()
     
+    
 
 
 view.setStyle({"cartoon": {"style": "oval","color": bb_color,"thickness": cartoon_radius}})
@@ -86,7 +87,7 @@ view.addStyle({"hetflag": True},
 
 if hl_pocket:
     view.addStyle({'within':{'distance':'5.5', 'sel':{'resn':'UNK',"elem": "C"}}}, 
-    {'stick': {'colorscheme':'white'}})
+    {'stick': {'colorscheme':'white', "radius": stick_radius}})
 
 
 for hl_resi in hl_resi_list:
@@ -96,19 +97,22 @@ for hl_resi in hl_resi_list:
 
 showmol(view, height=height, width=width)
 
-st.title("Prediction Scores")
+st.title("Prediction Confidence")
 
-col1, col2, col3 = st.columns(3)
-if pdb_file:
-    col1.write("All residues")
-    pddf=dataframes.get_resi_bfactor(temp_file_path)
-    col1.dataframe(pddf) 
+col2, col3 = st.columns(2)
+#if pdb_file:
+#    col1.write("All residues")
+#    pddf=dataframes.get_resi_bfactor(temp_file_path)
+#    col1.dataframe(pddf) 
     #col1.write("All residues statistics")
     #col1.dataframe(pddf['pLDDT'].describe()) 
 
-if hl_resi_list:
-    col2.write("Highlighted residues")
-    col2.dataframe(dataframes.get_resi_bfactor(temp_file_path, resi_list=hl_resi_list)) 
+if hl_pocket:
+    col2.write("Pocket")
+    pocket_resi_list=confidence.select_pocket_residue(temp_file_path)
+    col2.dataframe(dataframes.get_resi_bfactor(temp_file_path, resi_list=pocket_resi_list)) 
+    col2.write("Pocket Statistics")
+    col2.dataframe(dataframes.get_resi_bfactor(temp_file_path, resi_list=pocket_resi_list).describe()) 
 
 if hl_ligand:
     col3.write("Ligand")
