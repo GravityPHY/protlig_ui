@@ -46,7 +46,7 @@ hl_ligand = st.sidebar.checkbox(label="Highlight Ligand", value=False)
 
 hl_color = st.sidebar.text_input(label="Highlight Color",value="red")
 
-bb_color = st.sidebar.text_input(label="Backbone Color",value="spectrum")
+bb_color = st.sidebar.text_input(label="Backbone Color",value="orange")
 lig_color = st.sidebar.text_input(label="Ligand Color",value="white")
 ### Step 3) Py3Dmol
 
