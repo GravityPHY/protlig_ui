@@ -1,4 +1,6 @@
+import os
 import io
+import replicate
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -9,6 +11,7 @@ from stmol import showmol
 
 from utils import dataframes, confidence
 
+os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"]
 
 st.markdown("# Demo")
 
@@ -43,6 +46,8 @@ label_resi = st.sidebar.checkbox(label="Label Residues", value=True)
 
 hl_pocket = st.sidebar.checkbox(label="Highlight Pocket", value=False)
 hl_ligand = st.sidebar.checkbox(label="Highlight Ligand", value=False)
+
+generate_text = st.sidebar.checkbox(label="Generate analysis report", value=False)
 
 hl_color = st.sidebar.text_input(label="Highlight Color",value="red")
 
@@ -118,8 +123,42 @@ if hl_ligand:
     col3.write("Ligand")
     col3.dataframe(dataframes.get_resi_bfactor(temp_file_path, resi_name=["UNK","LIG","LG1"]))
 
- 
+if generate_text:
+    with st.chat_message("user"):
+        st.write("Hello 👋") 
 
+from openai import OpenAI
+# Set OpenAI API key from Streamlit secrets
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+# Set a default model
+if "openai_model" not in st.session_state:
+    st.session_state["openai_model"] = "gpt-3.5-turbo"
 
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-    
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Accept user input
+if prompt := st.chat_input("What is up?"):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(prompt)
+# Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        stream = client.chat.completions.create(
+            model=st.session_state["openai_model"],
+            messages=[
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.messages
+            ],
+            stream=True,
+        )
+        response = st.write_stream(stream)
+    st.session_state.messages.append({"role": "assistant", "content": response})

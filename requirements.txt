@@ -17,3 +17,5 @@ streamlit_molstar==0.4.21
 tqdm==4.59.0
 protobuf==3.20.0
 lxml==4.6.5
+replicate==0.34.1
+openai==1.51.0
