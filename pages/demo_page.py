@@ -140,7 +140,7 @@ def generate_llama2_response(prompt_input):
                                   "temperature":temperature, "top_p":top_p, "max_length":max_length, "repetition_penalty":1})
     return output
 
-st.title('🦙💬 How to understand prediction confidence?')
+st.title('💬 How to understand prediction confidence?')
 if 'REPLICATE_API_TOKEN' in st.secrets:
     st.success('API key already provided!', icon='✅')
     replicate_api = st.secrets['REPLICATE_API_TOKEN']
@@ -162,10 +162,13 @@ os.environ['REPLICATE_API_TOKEN'] = replicate_api
 
 if generate_text:
     ligand_confidence=dataframes.get_resi_bfactor(temp_file_path, resi_name=["UNK","LIG","LG1"])
-    prompt=f"Can you help me answer the question with the following information? From my project, I found that if the prediction confidence is above 80, than there is 80% percent chance the complex prediction is accurate; " \
-           f"if the prediction confidence is below 80 but above 60, there is 50% chance the prediction is accurate. " \
-           f"In the other cases, there is 10% chance the prediction is accurate." \
-           f"Now the prediction confidence is {ligand_confidence['Prediction Confidence']}, tell me how accurate this prediction is? Just tell me the result, no need to show the analyzing steps"
+    p_confidence=ligand_confidence['Prediction Confidence']
+    prompt=f"You are an assistant to help researcher understand some statistics; We will provide a number prediction confidence" \
+           f"From a benchmark study, we found that if the prediction confidence is in [80,100), than there is 80% percent chance the complex prediction is accurate. "\
+           f"if the prediction confidence is in [60,80), there is 50% chance the prediction is accurate."\
+           f"If the prediction confidence is in [0,60), there is 10% chance the prediction is accurate." \
+           f"In the other cases, the prediction confidence is ill-defined, the user might need to double check calculations." \
+           f"What is this prediction confidence of {ligand_confidence['Prediction Confidence']} tell us?."
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             response = generate_llama2_response(prompt)
