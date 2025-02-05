@@ -167,7 +167,7 @@ if generate_text:
            f"From a benchmark study, we found that if the prediction confidence is in [80,100), than there is 80% percent chance the complex prediction is accurate. "\
            f"if the prediction confidence is in [60,80), there is 50% chance the prediction is accurate."\
            f"If the prediction confidence is in [0,60), there is 10% chance the prediction is accurate." \
-           f"In the other cases, the prediction confidence is ill-defined, the user might need to double check calculations." \
+           f"If the prediction confidence is <0 or >100, then it is ill-defined, the user might need to double check calculations." \
            f"What is this prediction confidence of {ligand_confidence['Prediction Confidence']} tell us?."
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
