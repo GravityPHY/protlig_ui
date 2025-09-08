@@ -34,24 +34,14 @@ def select_pocket_residue(pdb_file_path, resi_id=-1, radius_cut=5.0):
     all_atoms = list(model.get_atoms())
     chain = structure[0]['A']
     near_resi_num=[]
+    near_resi_name=[]
     for residue in chain:
         for atom in ligand_atoms:
             distance = residue['CA'] - atom
             if distance < radius_cut:
                 near_resi_num.append(residue.get_id()[1])
+                near_resi_name.append(residue.get_resname())
                 break
-
-    #atoms = Selection.unfold_entities(structure,'A')
-
-    ##ns = NeighborSearch(all_atoms)
-    #near_atoms = []
-    #for atom in ligand_atoms:
-    #    near_atoms.extend(ns.search(atom.get_coord(), radius_cut))
-    #near_residues = set(atom.get_parent() for atom in near_atoms)
-
-    #near_resi_num=[]
-    #for residue in near_residues:
-    #    near_resi_num.append(residue.get_id()[1])
-    return near_resi_num
+    return near_resi_num, near_resi_name
 
 
