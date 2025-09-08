@@ -7,7 +7,6 @@ Pillow==9.0.1
 py3Dmol==2.0.0.post2
 pyfiglet==0.8.post1
 requests==2.27.1
-scipy==1.6.2
 seaborn==0.12.2
 statannot==0.2.3
 statsmodels==0.13.1
