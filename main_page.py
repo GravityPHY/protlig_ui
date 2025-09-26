@@ -68,7 +68,7 @@ def gather_structure_data(temp_file_path, hl_ligand, hl_pocket, hl_chain, hl_res
                 pocket_resi_list, pocket_resname_list = confidence.select_pocket_residue(temp_file_path)
                 pocket_df = dataframes.get_resi_bfactor(temp_file_path, resi_list=pocket_resi_list)
                 if not pocket_df.empty:
-                    avg_pocket_confidence = pocket_df['pLDDT'].mean()
+                    avg_pocket_confidence = pocket_df["Prediction Confidence"].mean()
                     structure_summary += f"\n=== BINDING POCKET ANALYSIS ===\n"
                     structure_summary += f"• Average Pocket Confidence (pLDDT): {avg_pocket_confidence:.2f}\n"
                     structure_summary += f"• Number of pocket residues: {len(pocket_resi_list)}\n"
